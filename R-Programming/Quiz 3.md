@@ -71,11 +71,12 @@ with(mtcars, tapply(mpg, cyl, mean)
 ```
 ### Explanation
 tapply is used to apply a function over subsets of a vector. Example, if you want to find the average age by gender in a dataset. tapply has five elements:
-    -1. x is a vector. 
-    -2. INDEX is a factor or a list of factors. IN this example the INDEXES are the variables we're measuring 
-    -3. FUN is a function to be applied
-    -4. ...contains other arguments to be passed through to the FUN
-    -5. Simply is a logical argument whose default is "TRUE" 
+
+    - 1. x is a vector. 
+    - 2. INDEX is a factor or a list of factors. IN this example the INDEXES are the variables we're measuring 
+    - 3. FUN is a function to be applied
+    - 4. ...contains other arguments to be passed through to the FUN
+    - 5. Simply is a logical argument whose default is "TRUE" 
     
 Question 4
 ----------
