@@ -1,4 +1,4 @@
-# Coursera-Data-Science-Specialization-Quiz 2
+# R Programming Quiz 2
 ======
 
 |Attempts|Score|
