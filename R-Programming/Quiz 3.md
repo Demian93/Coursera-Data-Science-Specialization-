@@ -17,167 +17,93 @@ data(iris)
 There will be an object called 'iris' in your workspace. In this dataset, what is the mean of 'Sepal.Length' for the species virginica? (Please only enter the numeric result and nothing else.)
 
 ### Answer
-The number 27 is returned
+6.588
 
 ### Explanation
-Because 'n' is not evaluated, it is not needed even though it is a formal argument.
-
-    > cube <- function(x, n) {
-    +     x^3
-    + }
-    > cube(3)
-    [1] 27
-
+```
+library(datasets)
+data(iris)
+head(iris)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+tapply(iris$Sepal.Length, iris$Species, mean)
+ setosa versicolor  virginica 
+     5.006      5.936      6.588 
 
 Question 2
 ----------
-The following code will produce a warning in R.
-
-    x <- 1:10
-    if(x > 5) {
-            x <- 0
-    }
-
-Why?
+Continuing with the 'iris' dataset from the previous Question, what R code returns a vector of the means of the variables 'Sepal.Length', 'Sepal.Width', 'Petal.Length', and 'Petal.Width'?
 
 ### Answer
-'x' is a vector of length 10 and 'if' can only test a single logical statement.
+apply(iris[, 1:4],2,mean]
 
 ### Explanation
 
-    > if(x > 5) {
-    +     x <- 0
-    + }
-    Warning message:
-    In if (x > 5) { :
-      the condition has length > 1 and only the first element will be used
+Apply is used to evaluate a function over the rows and columns of a dataset, matrix, or array. 
+Iris is the dataset and we want the means of each column. The 2 indicates that we want to means of each column (Margin), mean is the function. Generally speaking, the apply() function has three elements:
+     x as an array
+     Margin is an integer vector indicating which margins should be retained. 1 corresponds to row, and 2 corresponds to    columns. 
 
 Question 3
 ----------
-Consider the following function
-
-    f <- function(x) {
-            g <- function(y) {
-                    y + z
-            }
-            z <- 4
-            x + g(x)
-    }
-    
-If I then run in R
-
-    z <- 10
-    f(3)
-    
-What value is returned?
+Load the 'mtcars' dataset in R with the following code
+```
+library(datasets)
+data(mtcars)
+```
+There will be an object names 'mtcars' in your workspace. You can find some information about the dataset by running
+```
+?mtcars
+```
+How can one calculate the average miles per gallon (mpg) by number of cylinders in the car (cyl)?
 
 ### Answer
-10
-
+```
+tapply(mtcars$mpg, mtcars$cyl, mean)
+with(mtcars, tapply(mpg, cyl, mean)
+```
 ### Explanation
-
-    > f <- function(x) {
-    +     g <- function(y) {
-    +         y + z
-    +     }
-    +     z <- 4
-    +     x + g(x)
-    + }
-    > z <- 10
-    > f(3)
-    [1] 10
-
-
+tapply is used to apply a function over subsets of a vector. Example, if you want to find the average age by gender in a dataset. tapply has five elements:
+    1. x is a vector. 
+    2. INDEX is a factor or a list of factors. IN this example the INDEXES are the variables we're measuring 
+    3. FUN is a function to be applied
+    4. ...contains other arguments to be passed through to the FUN
+    5. Simply is a logical argument whose default is "TRUE" 
+    
 Question 4
 ----------
-Consider the following expression:
-
-    x <- 5
-    y <- if(x < 3) {
-            NA
-    } else {
-            10
-    }
-    
-What is the value of 'y' after evaluating this expression?
+Continuing with the 'mtcars' dataset from the previous Question, what is the absolute difference between the average horsepower of 4-cylinder cars and the average horsepower of 8-cylinder cars?
 
 ### Answer
-10
+126.559
 
 ### Explanation
+```
+> hp <- tapply(mtcars$hp, mtcars$cyl,mean)
+> hp
+        4         6         8 
+ 82.63636 122.28571 209.21429 
+> abs(hp[[1]] - hp[[3]])
+[1] 126.5779
+```
+OR
 
-    > x <- 5
-    > y <- if(x < 3) {
-    +     NA
-    + } else {
-    +     10
-    + }
-    > y
-    [1] 10
-
-
+```
+abs(mean(mtcars[mtcars$cyl==4,]$hp) - mean(mtcars[mtcars$cyl==8,]$hp))
+```
 Question 5
 ----------
-Consider the following R function
-
-    h <- function(x, y = NULL, d = 3L) {
-            z <- cbind(x, d)
-            if(!is.null(y))
-                    z <- z + y
-            else
-                    z <- z + f
-            g <- x + y / z
-            if(d == 3L)
-                    return(g)
-            g <- g + 10
-            g
-    }
-    
-Which symbol in the above function is a free variable?
+If you run
+```
+debug(ls)
+```
+what happens when you next call the 'ls' function?
 
 ### Answer
-f
 
-### Explanation
-A free variable is a variable that is not defined in the function nor an argument of the function.
-
-
-Question 6
-----------
-What is an environment in R?
-
-### Answer
-a collection of symbol/value pairs
-
-
-Question 7
-----------
-The R language uses what type of scoping rule for resolving free variables?
-
-### Answer
-lexical scoping
-
-
-Question 8
-----------
-How are free variables in R functions resolved?
-
-### Answer
-The values of free variables are searched for in the environment in which the function was defined
-
-
-Question 9
-----------
-What is one of the consequences of the scoping rules used in R?
-
-### Answer
-All objects must be stored in memory
-
-
-Question 10
------------
-In R, what is the parent frame?
-
-### Answer
-It is the environment in which a function was called
-
+Execution of 'ls' will suspend at the beginning of the function and you will be in the browser.
