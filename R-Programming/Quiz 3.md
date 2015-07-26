@@ -48,8 +48,8 @@ Apply is used to evaluate a function over the rows and columns of a dataset, mat
 
 Iris is the dataset and we want the means of each column. The 2 indicates that we want to means of each column (Margin), mean is the function. Generally speaking, the apply() function has three elements:
 
-    - 1. x as an array
-    - 2. Margin is an integer vector indicating which margins should be retained. 1 corresponds to row, and 2 corresponds to          columns. 
+    1. x as an array
+    2. Margin is an integer vector indicating which margins should be retained. 1 corresponds to row, and 2 corresponds to          columns. 
 
 Question 3
 ----------
@@ -72,11 +72,11 @@ with(mtcars, tapply(mpg, cyl, mean)
 ### Explanation
 tapply is used to apply a function over subsets of a vector. Example, if you want to find the average age by gender in a dataset. tapply has five elements:
 
-    - 1. x is a vector. 
-    - 2. INDEX is a factor or a list of factors. IN this example the INDEXES are the variables we're measuring 
-    - 3. FUN is a function to be applied
-    - 4. ...contains other arguments to be passed through to the FUN
-    - 5. Simply is a logical argument whose default is "TRUE" 
+    1. x is a vector. 
+    2. INDEX is a factor or a list of factors. IN this example the INDEXES are the variables we're measuring 
+    3. FUN is a function to be applied
+    4. ...contains other arguments to be passed through to the FUN
+    5. Simply is a logical argument whose default is "TRUE" 
     
 Question 4
 ----------
